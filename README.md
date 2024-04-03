@@ -19,11 +19,11 @@ This GitHub repository hosts a full-stack web application built using Node.js, M
 
 9. RESTful API: Adheres to RESTful principles for defining API endpoints, facilitating communication between the frontend and backend.
 
-10.Secure Authentication: Implements best practices for secure authentication, including password hashing and JWT token validation.
+10. Secure Authentication: Implements best practices for secure authentication, including password hashing and JWT token validation.
 
-11.Clean Codebase: Maintains a clean and well-structured codebase, following industry-standard coding conventions and practices.
+11. Clean Codebase: Maintains a clean and well-structured codebase, following industry-standard coding conventions and practices.
 
-12.Documentation: Provides comprehensive documentation to guide developers through setting up, running, and extending the application.
+12. Documentation: Provides comprehensive documentation to guide developers through setting up, running, and extending the application.
 
-13.This project serves as a practical demonstration of building a full-stack web application with user authentication and CRUD operations using Node.js, MongoDB, React, and JWT. It can be used as a learning resource or as a starting point for developing similar applications.
+13. This project serves as a practical demonstration of building a full-stack web application with user authentication and CRUD operations using Node.js, MongoDB, React, and JWT. It can be used as a learning resource or as a starting point for developing similar applications.
 
