@@ -15,7 +15,7 @@ This GitHub repository hosts a full-stack web application built using Node.js, M
 
 7. MongoDB Database: Integrates MongoDB as the database to store user information and application data, ensuring data persistence and flexibility.
 
-8. React Frontend: Implements the user interface using React, a p8.opular JavaScript library for building interactive user interfaces.
+8. React Frontend: Implements the user interface using React, a popular JavaScript library for building interactive user interfaces.
 
 9. RESTful API: Adheres to RESTful principles for defining API endpoints, facilitating communication between the frontend and backend.
 
