@@ -51,10 +51,6 @@ const Dashboard = () => {
   };
   
 
-  const handleCloseModal = () => {
-    navigate('/');
-  };
-
   return (
     <>
       <main id="main" className="main">

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddCompanyForm = () => {
   const [formData, setFormData] = useState({
@@ -22,9 +24,10 @@ const AddCompanyForm = () => {
     const { name, companyName, position, age, startDate } = formData;
     if (!name || !companyName || !position || !age || !startDate) {
       setError('Please fill in all fields');
+      toast.error('Please fill in all fields');
       return;
     }
-
+  
     try {
       const response = await fetch('http://localhost:5000/api/companies/add', {
         method: 'POST',
@@ -33,11 +36,12 @@ const AddCompanyForm = () => {
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (!response.ok) {
-        throw new Error('Failed to add company');
+        toast.error('Failed to add employee');
+        throw new Error('Failed to add employee');
       }
-
+  
       setFormData({
         name: '',
         companyName: '',
@@ -45,11 +49,12 @@ const AddCompanyForm = () => {
         age: '',
         startDate: '',
       });
-
+      
+      toast.success('Employee added successfully');
       navigate('/');
     } catch (error) {
       console.error('Error adding company:', error);
-      setError('Failed to add company. Please try again later.');
+      setError('Failed to add employee. Please try again later.');
     }
   };
 
@@ -146,6 +151,7 @@ const AddCompanyForm = () => {
           </div>
         </section>
       </div>
+      <ToastContainer />
     </main>
   );
 };

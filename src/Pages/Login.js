@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -9,11 +11,11 @@ const Login = () => {
   const [formValid, setFormValid] = useState(false);
   const [usernameTouched, setUsernameTouched] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
-  const navigate  = useNavigate ();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!username.trim() || !password.trim()) {
       setError('Please enter both username and password.');
       return;
@@ -27,7 +29,7 @@ const Login = () => {
         },
         body: JSON.stringify({
           email: username,
-          password: password
+          password: password,
         }),
       });
 
@@ -35,39 +37,34 @@ const Login = () => {
 
       if (!response.ok) {
         setError(data.error);
+        toast.error(data.error); // Display error message with toast
         return;
       }
 
       const { token, user } = data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      navigate ('/');
+      navigate('/');
 
+      toast.success('Login successful'); // Display success message with toast
 
     } catch (error) {
       console.error('Error occurred:', error);
       setError('An error occurred. Please try again later.');
+      toast.error('An error occurred. Please try again later.'); // Display error message with toast
     }
   };
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
     setUsernameTouched(true);
-    if (e.target.value.trim() && password.trim()) {
-      setFormValid(true);
-    } else {
-      setFormValid(false);
-    }
+    setFormValid(e.target.value.trim() && password.trim());
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
     setPasswordTouched(true);
-    if (e.target.value.trim() && username.trim()) {
-      setFormValid(true);
-    } else {
-      setFormValid(false);
-    }
+    setFormValid(username.trim() && e.target.value.trim());
   };
 
   return (
@@ -89,7 +86,7 @@ const Login = () => {
                       <h5 className="card-title text-center pb-0 fs-4">Login to Your Account</h5>
                       <p className="text-center small">Enter your username &amp; password to login</p>
                     </div>
-                    <form className="row g-3" onSubmit={handleSubmit} method= "post">
+                    <form className="row g-3" onSubmit={handleSubmit} method="post">
                       <div className="col-12">
                         <label htmlFor="yourUsername" className="form-label">Email <span className="text-danger">*</span></label>
                         <input
@@ -133,6 +130,7 @@ const Login = () => {
           </div>
         </section>
       </div>
+      <ToastContainer />
     </main>
   );
 };

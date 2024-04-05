@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EditCompanyForm = () => {
   const { companyId } = useParams();
@@ -14,23 +16,23 @@ const EditCompanyForm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchCompanyData();
-  }, []);
-
-  const fetchCompanyData = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/api/companies/${companyId}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch company data');
+    const fetchCompanyData = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/companies/${companyId}`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch company data');
+        }
+        const companyData = await response.json();
+        const formattedStartDate = companyData.startDate.substring(0, 10);
+        setFormData({ ...companyData, startDate: formattedStartDate });
+      } catch (error) {
+        console.error('Error fetching company data:', error);
+        setError('Failed to fetch company data. Please try again later.');
       }
-      const companyData = await response.json();
-      const formattedStartDate = companyData.startDate.substring(0, 10);
-      setFormData({ ...companyData, startDate: formattedStartDate });
-    } catch (error) {
-      console.error('Error fetching company data:', error);
-      setError('Failed to fetch company data. Please try again later.');
-    }
-  };
+    };
+
+    fetchCompanyData();
+  }, [companyId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -42,6 +44,7 @@ const EditCompanyForm = () => {
     const { name, companyName, position, age, startDate } = formData;
     if (!name || !companyName || !position || !age || !startDate) {
       setError('Please fill in all fields');
+      toast.error('Please fill in all fields');
       return;
     }
 
@@ -55,9 +58,10 @@ const EditCompanyForm = () => {
       });
 
       if (!response.ok) {
+        toast.error('Failed to update company');
         throw new Error('Failed to update company');
       }
-
+      toast.success('Login successful');
       navigate('/');
     } catch (error) {
       console.error('Error updating company:', error);
@@ -158,6 +162,7 @@ const EditCompanyForm = () => {
           </div>
         </section>
       </div>
+      <ToastContainer />
     </main>
   );
 };

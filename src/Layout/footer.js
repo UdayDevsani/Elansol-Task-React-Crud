@@ -1,30 +1,27 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-class Footer extends Component {  
-    render() {  
-        return (  
-            <div>
-            <footer id="footer" className="footer">
-              <div className="copyright">
-                © Copyright{" "}
-                <strong>
-                  <span>NiceAdmin</span>
-                </strong>
-                . All Rights Reserved
-              </div>
-              <div className="credits">
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-              </div>
-            </footer>
-            <a
-              href="#"
-              className="back-to-top d-flex align-items-center justify-content-center"
-            >
-              <i className="bi bi-arrow-up-short" />
-            </a>  
-            </div>  
-        )  
-    }  
-}  
-  
-export default Footer  
+class Footer extends Component {
+  render() {
+    return (
+      <div>
+        <footer id="footer" className="footer">
+          <div className="copyright">
+            © Copyright{' '}
+            <strong>
+              <span>Devonex</span>
+            </strong>
+            . All Rights Reserved
+          </div>
+        </footer>
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="back-to-top d-flex align-items-center justify-content-center"
+        >
+          <i className="bi bi-arrow-up-short" />
+        </button>
+      </div>
+    );
+  }
+}
+
+export default Footer;

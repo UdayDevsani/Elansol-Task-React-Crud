@@ -9,12 +9,11 @@ export class Sidebar extends Component {
       <aside id="sidebar" className="sidebar">
         <ul className="sidebar-nav" id="sidebar-nav">
           <li className="nav-item">
-            <a className="nav-link ">
-              <i className="bi bi-grid" />
-              <Link to="/signup"></Link>
-              <span>Dashboard</span>
-            </a>
-          </li>
+          <Link to="/signup" className="nav-link">
+            <i className="bi bi-grid" />
+            <span>Dashboard</span>
+          </Link>
+        </li>
         </ul>
       </aside>
       </div>

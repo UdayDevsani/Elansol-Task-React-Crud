@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate  } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Registration = () => {
   const [name, setName] = useState('');
   const [dob, setDOB] = useState('');
@@ -28,22 +30,24 @@ const Registration = () => {
         },
         body: JSON.stringify({ name, dob, email, password }),
       });
-
+  
       if (!response.ok) {
         const data = await response.json();
         setError(data.error || 'Failed to register. Please try again later.');
+        toast.error(data.error || 'Failed to register. Please try again later.');
       } else {
         setName('');
         setDOB('');
         setEmail('');
         setPassword('');
         setError('');
-        alert('Registration successful!');
-        navigate ('/login');
+        toast.success('Registration successful!');
+        navigate('/login');
       }
     } catch (error) {
       console.error('Error occurred:', error);
       setError('An error occurred. Please try again later.');
+      toast.error('An error occurred. Please try again later.');
     }
   };
 
@@ -170,6 +174,7 @@ const Registration = () => {
           </div>
         </section>
       </div>
+      <ToastContainer />
     </main>
   );
 };
